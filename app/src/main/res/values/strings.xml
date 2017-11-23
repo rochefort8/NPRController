@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">nprcontrollerandroid</string>
+
+    <string name="request_enable_location">2</string>
+    <string name="error_title">Error</string>
+    <string name="ble_not_supported">お使いのデバイスではBLEが使用できません。</string>
+
+    <string name="uuid_service">0000A000-0000-1000-8000-00805F9B34FB</string>
+    <!-- Characteristic UUID -->
+    <string name="uuid_read_characteristic">0000A001-0000-1000-8000-00805F9B34FB</string>
+    <string name="uuid_write_characteristic">0000A002-0000-1000-8000-00805F9B34FB</string>
+    <!-- Characteristic config UUID(fixed number) -->
+
+</resources>
