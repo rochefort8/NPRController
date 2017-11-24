@@ -3,23 +3,17 @@ package hoegaarden1917.com.nprcontrollerandroid;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.bluetooth.BluetoothGatt;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.speech.RecognizerIntent;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,16 +56,21 @@ public class MainActivity extends AppCompatActivity {
                     }
                     mDevice = new NPRDevice(mBleCentral, (BluetoothGatt) msg.obj);
                     setContentView(R.layout.activity_nprdevice);
+
+                    TextView text_device_address = (TextView)findViewById(R.id.text_device_address);
+                    text_device_address.setText(mDevice.getAddress());
+
                     Button button_start_recognition = (Button)findViewById(R.id.button_start_recognition);
                     button_start_recognition.setOnClickListener((View v) -> {
                         Log.d("BDK-TS+pp","Recognition START!") ;
                         mDevice.startRecognition();
-
                     });
-                    Button button_start_image_data_send = (Button)findViewById(R.id.button_start_image_data_send) ;
-                    button_start_image_data_send.setOnClickListener((View v) -> {
-                        Log.d("BDK-TS+pp","Image sending START!") ;
-                        mDevice.startSendImage();
+
+
+                    Button button_start_recognition_with_data_save = (Button)findViewById(R.id.button_start_recognition_with_data_save) ;
+                    button_start_recognition_with_data_save.setOnClickListener((View v) -> {
+                        Log.d("BDK-TS+pp","Recognition START(with Image save)!") ;
+                        mDevice.startRecognitionWithImageSave();
                     });
 
                 } else {
