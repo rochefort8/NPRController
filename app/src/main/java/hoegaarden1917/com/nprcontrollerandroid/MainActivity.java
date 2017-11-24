@@ -56,17 +56,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     mDevice = new NPRDevice(mBleCentral, (BluetoothGatt) msg.obj);
                     setContentView(R.layout.activity_nprdevice);
-
-                    TextView text_device_address = (TextView)findViewById(R.id.text_device_address);
-                    text_device_address.setText(mDevice.getAddress());
+                    getSupportActionBar().setTitle(mDevice.getAddress());
 
                     Button button_start_recognition = (Button)findViewById(R.id.button_start_recognition);
                     button_start_recognition.setOnClickListener((View v) -> {
                         Log.d("BDK-TS+pp","Recognition START!") ;
                         mDevice.startRecognition();
                     });
-
-
                     Button button_start_recognition_with_data_save = (Button)findViewById(R.id.button_start_recognition_with_data_save) ;
                     button_start_recognition_with_data_save.setOnClickListener((View v) -> {
                         Log.d("BDK-TS+pp","Recognition START(with Image save)!") ;
@@ -76,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     mDevice = null ;
                     setContentView(R.layout.activity_main);
+                    getSupportActionBar().setTitle("NPR Device Controller");
                 }
             }
         };

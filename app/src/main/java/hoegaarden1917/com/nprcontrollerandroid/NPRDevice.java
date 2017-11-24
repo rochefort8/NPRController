@@ -16,7 +16,6 @@ public class NPRDevice extends Object  {
     String imagePath ;
     boolean mSwitch ;
 
-
     public NPRDevice (BleCentral bleCentral,BluetoothGatt gatt) {
         mGatt       = gatt ;
         mBleCentral = bleCentral ;
@@ -30,17 +29,21 @@ public class NPRDevice extends Object  {
 
     public BluetoothGatt getGatt() { return mGatt; }
 
-    public void startRecognition() {
-        byte[] bytes = new byte[1] ;
-        bytes[0] = 0x01 ;
-        mBleCentral.writeCharacteristic(mGatt,bytes);
-        mSwitch = true ;
+    public String getAddress() {
+        BluetoothDevice device = mGatt.getDevice() ;
+        return device.getAddress() ;
     }
+    public void startRecognition()              { _startRecognition(false) ; }
+    public void startRecognitionWithImageSave() { _startRecognition(true) ; }
 
-    public void startSendImage() {
-        byte[] bytes = new byte[1] ;
-        bytes[0] = 0x00 ;
-        mBleCentral.writeCharacteristic(mGatt,bytes);
-        mSwitch = false ;
+    private void _startRecognition(boolean willSaveImage) {
+        byte[] bytes = new byte[1];
+        if (willSaveImage == false) {
+            bytes[0] = 0x00;
+        } else {
+            bytes[0] = 0x01;
+        }
+        mBleCentral.writeCharacteristic(mGatt, bytes);
+        mSwitch = true;
     }
 }

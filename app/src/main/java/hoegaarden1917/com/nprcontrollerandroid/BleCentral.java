@@ -126,19 +126,11 @@ public class BleCentral  implements IBleActivity {
         }
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status){
+
             if (status == BluetoothGatt.GATT_SUCCESS) {
-
-                List<BluetoothGattService> service = gatt.getServices();
-
-                for (int i = 0; i < service.size();i++) {
-                    BluetoothGattService s = service.get(i) ;
-                    UUID uuid = s.getUuid() ;
-                    Log.d("W",uuid.toString()) ;
-                }
-
                 BluetoothGattService bleService = gatt.getService(UUID.fromString(mContext.getString(R.string.uuid_service)));
-                if (bleService != null){
 
+                if (bleService != null){
                     BluetoothGattCharacteristic bleCharacteristic =
                             bleService.getCharacteristic(UUID.fromString(mContext.getString(R.string.uuid_write_characteristic)));
                     if (bleCharacteristic != null) {
@@ -172,7 +164,6 @@ public class BleCentral  implements IBleActivity {
             this.startScanByBleScanner();
         } else {
 */
-            // OS ver.6.0以上ならGPSがOnになっているかを確認する(GPSがOffだとScanに失敗するため).
             this.startScanByBleScanner();
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -199,10 +190,12 @@ public class BleCentral  implements IBleActivity {
                 String name = device.getName() ;
                 String address = device.getAddress() ;
 
-//                Log.d("BLE device",name + "/" + address);
+//               Log.d("BLE device",name + "/" + address);
 
                 // Trying to connect only to specific name
-                if ((name != null) && name.equals("NaokyAndHiroky")) {
+//                if ((name != null) && name.equals("NaokyAndHiroky")) {
+                if ((name != null) && name.equals(mContext.getString(R.string.device_name))) {
+                     Log.d("BLE device",name + "/" + address);
                     result.getDevice().connectGatt(mContext.getApplicationContext(), false, mGattCallback);
                 }
             }

@@ -9,21 +9,21 @@
     android:paddingRight="4dp" >
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/module"
         android:id="@+id/id_img_module"
+        android:layout_width="120dp"
+        android:layout_height="78dp"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        app:srcCompat="@mipmap/module" />
 
     <TextView
-        android:text="No Device Found."
+        android:id="@+id/text_nodevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:id="@+id/text_nodevice"
         android:layout_below="@+id/id_img_module"
         android:layout_centerHorizontal="true"
-        android:textSize="18sp" />
+        android:layout_marginTop="12dp"
+        android:text="No Device Found."
+        android:textSize="24sp" />
 
 </RelativeLayout>
